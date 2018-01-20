@@ -7,26 +7,40 @@ var key_down_time_arr = [];
 // In-between time keyboard press - can be negative if type fast
 var in_between_arr = [];
 
-var password_field = document.getElementById("password");
-password_field.addEventListener('keydown', function (e) {
-    //console.log(e.keyCode);
-    if ((event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 65 && event.keyCode <= 90)) {
+var authenticate = false;
+
+var authentication_toggle = document.getElementById("authenticate");
+authentication_toggle.addEventListener('change', function() {
+    var password_field = document.getElementById("password");
+    if(this.checked) {
+        password_field.addEventListener('keydown', appendToKeyDown, true);
+        password_field.addEventListener('keyup', appendToKeyUp, true);
+        authenticate = true;
+    } else {
+        authenticate = false;
+        console.log("unchecked");
+        password_field.removeEventListener('keydown', appendToKeyDown, true);
+        password_field.removeEventListener('keyup', appendToKeyUp, true);
+    }
+});
+
+var appendToKeyDown = function(e) {
+    if ((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 65 && e.keyCode <= 90)) {
         var down_date = new Date();
         var timeStamp = down_date.getTime();
         keyDown_arr.push(timeStamp);
-        //console.log(timeStamp);
+        console.log(timeStamp);
     }
-}, true);
+}
 
-password_field.addEventListener('keyup', function(e) {
-    //console.log(e.keyCode);
-    if ((event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 65 && event.keyCode <= 90)) {
+var appendToKeyUp = function(e) {
+    if ((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 65 && e.keyCode <= 90)) {
         var up_date = new Date();
         var timeStamp = up_date.getTime();
         keyUp_arr.push(timeStamp);
-        //console.log(timeStamp);
+        console.log(timeStamp);
     }
-}, true);
+}
 
 function login_action() {
     // Handle Post request
@@ -59,8 +73,21 @@ function post_request(username, password) {
     http.setRequestHeader("username", username);
     http.setRequestHeader("password", password);
     // Send the two data arrays
-    http.setRequestHeader("key_down", key_down_time_arr);
-    http.setRequestHeader("in_between", in_between_arr);
+    if (authenticate == true) {
+        http.setRequestHeader("key_down", key_down_time_arr);
+        http.setRequestHeader("in_between", in_between_arr);
+    }
 
+    http.onreadystatechange() = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseTest);
+            // Successful Login
+            window.alert("Successfully Logged In");
+        } else {
+            console.log("Failed Login");
+            window.alert("Login Failure, Typing Patter different");
+        }
+    }
     http.send();
+
 }
