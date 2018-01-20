@@ -14,7 +14,7 @@ class trainer{
   // {input: { r: 0.03, g: 0.7, b: 0.5 }, output: 0},  // black
   train(){
     classifier.trainBatch(this.data);
- }
+  }
 
   classify(data, callback){
     classifier.classify(data, function(success){

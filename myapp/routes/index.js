@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/john', function(req, res, next){
-    res.render('LoginTemplate');
+    res.render('index');
 })
 
 router.post('/train', function(req, res, next){
