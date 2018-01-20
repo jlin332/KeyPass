@@ -29,7 +29,7 @@ var appendToKeyDown = function(e) {
         var down_date = new Date();
         var timeStamp = down_date.getTime();
         keyDown_arr.push(timeStamp);
-        console.log(timeStamp);
+        //console.log(timeStamp);
     }
 }
 
@@ -38,7 +38,7 @@ var appendToKeyUp = function(e) {
         var up_date = new Date();
         var timeStamp = up_date.getTime();
         keyUp_arr.push(timeStamp);
-        console.log(timeStamp);
+        //console.log(timeStamp);
     }
 }
 
@@ -50,7 +50,7 @@ function login_action() {
     compute_key_down_time();
     console.log(key_down_time_arr);
     console.log(in_between_arr);
-    //post_request(username, password);
+    post_request(username, password);
 }
 
 function compute_key_down_time() {
@@ -66,28 +66,27 @@ function compute_key_down_time() {
 
 function post_request(username, password) {
     // Post to the Node server endpoint
-    var http = XMLHttpRequest();
+    var http = new XMLHttpRequest();
     console.log("start POST request");
-    http.open("POST", "", true); // http://127.0.0.1:1337/ replace with our server
+    http.open("POST", "/train", true); // http://127.0.0.1:1337/ replace with our server
+    //http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    //http.open("GET", "/test", true);
     // Send the Password and Username for first level authentication
-    http.setRequestHeader("username", username);
-    http.setRequestHeader("password", password);
+    //http.setRequestHeader("username", username);
+    //http.setRequestHeader("password", password);
     // Send the two data arrays
-    if (authenticate == true) {
+    /*if (authenticate == true) {
         http.setRequestHeader("key_down", key_down_time_arr);
         http.setRequestHeader("in_between", in_between_arr);
-    }
-
-    http.onreadystatechange() = function() {
+    }*/
+    http.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseTest);
+            console.log(this.responseText);
             // Successful Login
             window.alert("Successfully Logged In");
-        } else {
+        } else if (this.readyState == 4) {
             console.log("Failed Login");
-            window.alert("Login Failure, Typing Patter different");
         }
     }
-    http.send();
-
+    http.send("Test");
 }
