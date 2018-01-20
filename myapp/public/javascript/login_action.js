@@ -11,7 +11,8 @@ var in_between_arr = [];
 var dictionary = [];
 
 var authenticate = false;
-var is_user = 0;
+var is_user = 1;
+var training = false;
 
 var authentication_toggle = document.getElementById("authenticate");
 authentication_toggle.addEventListener('change', function() {
@@ -31,10 +32,11 @@ authentication_toggle.addEventListener('change', function() {
 var training_toggle = document.getElementById("training");
 training_toggle.addEventListener('change', function() {
     if (this.checked) {
-        is_user = 1;
-        console.log("Is User");
+        training = true;
+        console.log("Training");
     } else {
-        is_user = 0;
+        training = false;
+        console.log("Stop Training");
     }
 });
 
@@ -67,7 +69,12 @@ function login_action() {
     //console.log(key_down_time_arr);
     //console.log(in_between_arr);
     console.log(dictionary);
-    post_request(username, password);
+    if (!training) {
+        post_request(username, password);
+    } else {
+        training_request();
+    }
+    reset();
 }
 
 function compute_key_down_time() {
@@ -82,18 +89,48 @@ function compute_key_down_time() {
     }
 }
 
+function reset() {
+    dictionary = [];
+    character_arr = [];
+    in_between_arr = [];
+    keyDown_arr = [];
+    key_down_time_arr = [];
+    keyUp_arr = [];
+}
+
+function training_request() {
+    var http = new XMLHttpRequest();
+    console.log("start Training POST request");
+    http.open("POST", "/train", true);
+    http.setRequestHeader("Content-type", "application/json");
+    // Send the two data arrays
+    if (authenticate == true) {
+        http.setRequestHeader("data", dictionary);
+    }
+    http.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            window.alert("Training Successful");
+        } else if (this.readyState == 4) {
+            console.log("Failed Training");
+        }
+        reset();
+        document.getElementById("password").value = "";
+    }
+    http.send(JSON.stringify({user: is_user })); //Send 1 if is user
+}
+
 function post_request(username, password) {
     // Post to the Node server endpoint
     var http = new XMLHttpRequest();
     console.log("start POST request");
-    http.open("POST", "/train", true);
+    http.open("POST", "/login", true);
     http.setRequestHeader("Content-type", "application/json");
     // Send the Password and Username for first level authentication
     http.setRequestHeader("username", username);
     http.setRequestHeader("password", password);
     // Send the two data arrays
     if (authenticate == true) {
-        console.log("sent data");
+        //console.log("sent data");
         http.setRequestHeader("data", dictionary);
     }
     http.onreadystatechange = function() {
