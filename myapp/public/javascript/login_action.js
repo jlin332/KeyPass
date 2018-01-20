@@ -8,6 +8,7 @@ var keyUp_arr = [];
 var key_down_time_arr = [];
 // In-between time keyboard press - can be negative if type fast
 var in_between_arr = [];
+var dictionary = [];
 
 var authenticate = false;
 var is_user = 0;
@@ -42,8 +43,9 @@ var appendToKeyDown = function(e) {
         var down_date = new Date();
         var timeStamp = down_date.getTime();
         keyDown_arr.push(timeStamp);
-        var character_pressed = String.fromCharCode(e.keyCode));
+        var character_pressed = String.fromCharCode(e.keyCode);
         character_arr.push(character_pressed);
+        //console.log(timeStamp);
     }
 }
 
@@ -62,19 +64,21 @@ function login_action() {
     var username = document.getElementsByName('username')[0].value;
     var password = document.getElementsByName('password')[0].value;
     compute_key_down_time();
-    console.log(key_down_time_arr);
-    console.log(in_between_arr);
+    //console.log(key_down_time_arr);
+    //console.log(in_between_arr);
+    console.log(dictionary);
     post_request(username, password);
 }
 
 function compute_key_down_time() {
-    console.log(keyUp_arr.length);
-    console.log(keyDown_arr.length);
     for (i = 0; i < keyUp_arr.length; i++)  {
         key_down_time_arr[i] = keyUp_arr[i] - keyDown_arr[i];
     }
     for (t = 1; t < keyDown_arr.length; t++) {
         in_between_arr[t-1] = keyDown_arr[t] - keyUp_arr[t-1];
+    }
+    for (x = 0; x < in_between_arr.length; x++) {
+        dictionary.push([character_arr[x+1], key_down_time_arr[x+1], in_between_arr[x]]);
     }
 }
 
@@ -89,8 +93,8 @@ function post_request(username, password) {
     http.setRequestHeader("password", password);
     // Send the two data arrays
     if (authenticate == true) {
-        http.setRequestHeader("key_down", key_down_time_arr);
-        http.setRequestHeader("in_between", in_between_arr);
+        console.log("sent data");
+        http.setRequestHeader("data", dictionary);
     }
     http.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {

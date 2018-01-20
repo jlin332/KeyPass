@@ -16,7 +16,8 @@ router.get('/john', function(req, res, next){
 router.post('/train', function(req, res, next){
     var username = req.get("username");
     var password = req.get("password");
-    
+    var data = req.get("data");
+    console.log(data);
     res.status(200).send();
 })
 
