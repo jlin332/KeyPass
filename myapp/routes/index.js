@@ -29,7 +29,6 @@ router.post('/login', function(req, res, next){
     if(cheese){
       res.send(true);
     }
-    
   })
 
 })
