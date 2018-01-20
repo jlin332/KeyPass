@@ -1,9 +1,9 @@
 var express = require('express');
 var json = require('jsonify');
-//var trainer = require('./learning/train');
+var trainer = require('../learning/train');
 var router = express.Router();
 
-//var train = new trainer.trainer();
+// var train = new trainer.trainer();
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express' });
@@ -16,7 +16,7 @@ router.get('/john', function(req, res, next){
 router.post('/train', function(req, res, next){
     var username = req.get("username");
     var password = req.get("password");
-    
+
     res.status(200).send();
 })
 
