@@ -1,6 +1,10 @@
+body {
+    background-color: #a5e0dd;
+}
 #title {
     font-size: 40px;
     margin-bottom: 10px;
+    margin-top: 70px;
 }
 
 #center_wrapper {
@@ -11,16 +15,27 @@
     justify-content: center;
 }
 
+#border_wrapper {
+    margin-top: 140px;
+    width:40%;
+    height: 70%;
+    border-style: solid;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
 #input_wrapper {
     text-align: left;
-    width: 20%;
-    height: 30%;
+    width: 40%;
+    height: 80%;
 }
 
 .input {
     font-size: 20px;
     text-align: left;
-    margin-top: 10px;
+    margin-top: 15px;
     margin-bottom: 10px;
 }
 

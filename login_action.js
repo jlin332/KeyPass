@@ -30,14 +30,13 @@ password_field.addEventListener('keyup', function(e) {
 
 function login_action() {
     // Handle Post request
+    console.log("Login_action_pressed");
     var username = document.getElementsByName('username')[0].value;
     var password = document.getElementsByName('password')[0].value;
-
-    console.log("Login_action_pressed");
     compute_key_down_time();
     console.log(key_down_time_arr);
     console.log(in_between_arr);
-    //post_request();
+    //post_request(username, password);
 }
 
 function compute_key_down_time() {
@@ -51,10 +50,17 @@ function compute_key_down_time() {
     }
 }
 
-function post_request() {
+function post_request(username, password) {
     // Post to the Node server endpoint
-
+    var http = XMLHttpRequest();
+    console.log("start POST request");
+    http.open("POST", "", true); // http://127.0.0.1:1337/ replace with our server
     // Send the Password and Username for first level authentication
+    http.setRequestHeader("username", username);
+    http.setRequestHeader("password", password);
+    // Send the two data arrays
+    http.setRequestHeader("key_down", key_down_time_arr);
+    http.setRequestHeader("in_between", in_between_arr);
 
-    // Send the three data arrays
+    http.send();
 }
