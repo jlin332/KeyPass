@@ -74,7 +74,6 @@ input:focus :-ms-input-placeholder {
   transition: 250ms background ease-in;
 } */
 
-
 .login_button {
   border: 1px solid white;
   background: transparent;

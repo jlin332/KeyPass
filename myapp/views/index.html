@@ -4,13 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="../public/css/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-
-
-      <link rel="stylesheet" href="../public/css/styler.css">
-
-
+    <link rel="stylesheet" href="../public/css/styler.css">
 </head>
 
 <body>
@@ -37,9 +32,7 @@
           </label>
       </div>
   </div>
-
-
-  <form class="login-form">
+  <div class="login-form">
   <p class="login-text">
     <span class="fa-stack fa-lg">
       <i class="fa fa-circle fa-stack-2x"></i>
@@ -49,8 +42,8 @@
 
   <input id = "user_id" type="text" class="username" autofocus="true" required="true" placeholder="Username" />
   <input id = "password" type="text" class="password" required="true" placeholder="Password" />
-  <button type="submit" name="Login" value="Login" class="login_button" onclick="login_action()" />
-</form>
+  <button type="submit" name="Login" class="login_button" onclick="login_action()"> Login </button>
+</div>
 <div class="underlay-photo"></div>
 <div class="underlay-black"></div>
 </body>

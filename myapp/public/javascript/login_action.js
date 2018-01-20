@@ -63,8 +63,8 @@ var appendToKeyUp = function(e) {
 function login_action() {
     // Handle Post request
     console.log("Login_action_pressed");
-    var username = document.getElementsByName('username')[0].value;
-    var password = document.getElementsByName('password')[0].value;
+    var username = document.getElementById('user_id').value;
+    var password = document.getElementById('password').value;
     compute_key_down_time();
     //console.log(key_down_time_arr);
     //console.log(in_between_arr);
