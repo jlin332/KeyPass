@@ -40,6 +40,15 @@ training_toggle.addEventListener('change', function() {
     }
 });
 
+var user_toggle = document.getElementById("is_user");
+user_toggle.addEventListener('change', function() {
+    if (this.checked) {
+        is_user = 1;
+    } else {
+        is_user = 0;
+    }
+});
+
 var appendToKeyDown = function(e) {
     if ((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 65 && e.keyCode <= 90)) {
         var down_date = new Date();
