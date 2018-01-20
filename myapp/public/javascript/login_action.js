@@ -1,3 +1,5 @@
+// Store key character pressed
+var character_arr = [];
 // Store time when key is pressed down
 var keyDown_arr = [];
 // Store time when key is released
@@ -40,7 +42,8 @@ var appendToKeyDown = function(e) {
         var down_date = new Date();
         var timeStamp = down_date.getTime();
         keyDown_arr.push(timeStamp);
-        //console.log(timeStamp);
+        var character_pressed = String.fromCharCode(e.keyCode));
+        character_arr.push(character_pressed);
     }
 }
 

@@ -14,9 +14,10 @@ router.get('/john', function(req, res, next){
 })
 
 router.post('/train', function(req, res, next){
-    console.log(req.body);
-    console.log(req.get("username"));
-    res.status(200).send("Test");
+    var username = req.get("username");
+    var password = req.get("password");
+    
+    res.status(200).send();
 })
 
 router.post('/login', function(req, res, next){
@@ -24,7 +25,6 @@ router.post('/login', function(req, res, next){
     if(cheese){
       res.send(true);
     }
-
   })
 
 })
