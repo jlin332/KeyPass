@@ -8,6 +8,7 @@ var key_down_time_arr = [];
 var in_between_arr = [];
 
 var authenticate = false;
+var is_user = 0;
 
 var authentication_toggle = document.getElementById("authenticate");
 authentication_toggle.addEventListener('change', function() {
@@ -21,6 +22,16 @@ authentication_toggle.addEventListener('change', function() {
         console.log("unchecked");
         password_field.removeEventListener('keydown', appendToKeyDown, true);
         password_field.removeEventListener('keyup', appendToKeyUp, true);
+    }
+});
+
+var training_toggle = document.getElementById("training");
+training_toggle.addEventListener('change', function() {
+    if (this.checked) {
+        is_user = 1;
+        console.log("Is User");
+    } else {
+        is_user = 0;
     }
 });
 
@@ -68,25 +79,23 @@ function post_request(username, password) {
     // Post to the Node server endpoint
     var http = new XMLHttpRequest();
     console.log("start POST request");
-    http.open("POST", "/train", true); // http://127.0.0.1:1337/ replace with our server
-    //http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    //http.open("GET", "/test", true);
+    http.open("POST", "/train", true);
+    http.setRequestHeader("Content-type", "application/json");
     // Send the Password and Username for first level authentication
-    //http.setRequestHeader("username", username);
-    //http.setRequestHeader("password", password);
+    http.setRequestHeader("username", username);
+    http.setRequestHeader("password", password);
     // Send the two data arrays
-    /*if (authenticate == true) {
+    if (authenticate == true) {
         http.setRequestHeader("key_down", key_down_time_arr);
         http.setRequestHeader("in_between", in_between_arr);
-    }*/
+    }
     http.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText);
             // Successful Login
             window.alert("Successfully Logged In");
         } else if (this.readyState == 4) {
             console.log("Failed Login");
         }
     }
-    http.send("Test");
+    http.send(JSON.stringify({user: is_user })); //Send 1 if is user
 }
