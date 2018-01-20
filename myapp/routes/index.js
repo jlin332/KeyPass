@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/john', function(req, res, next){
-  res.send('hello!');
+  res.render('LoginTemplate');
 })
 
 module.exports = router;
