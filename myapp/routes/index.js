@@ -17,7 +17,8 @@ router.post('/train', function(req, res, next){
     var username = req.get("username");
     var password = req.get("password");
     var data = req.get("data");
-    console.log(data);
+    //console.log(data);
+    console.log(req.body["user"]);
     res.status(200).send();
 })
 
