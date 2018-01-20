@@ -1,9 +1,9 @@
 var express = require('express');
 var json = require('jsonify');
-//var trainer = require('./learning/train');
+var trainer = require('../learning/train');
 var router = express.Router();
 
-//var train = new trainer.trainer();
+// var train = new trainer.trainer();
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express' });
