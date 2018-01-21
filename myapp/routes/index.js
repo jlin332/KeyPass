@@ -17,18 +17,19 @@ router.post('/train', function(req, res, next){
     var username = req.get("username");
     var password = req.get("password");
     var data = req.get("data");
-    console.log(data);
-    console.log(req.body["user"]);
+    //console.log(data);
+    //console.log(req.body["user"]);
     trainer.addData(data, req.body["user"]);
     res.status(200).send();
 })
 
 router.post('/login', function(req, res, next){
-  console.log("Verifying with...");
-  console.log(req.get("data"));
+  //console.log("Verifying with...");
+  //console.log(req.get("data"));
   trainer.trainer(function () {
     var score = trainer.classify(req.get("data"));
-    console.log(score);
+    //console.log(score + " " + req.body["user"]);
+    res.status(200).send(score);
   })
 
 

@@ -56,7 +56,6 @@ var appendToKeyDown = function(e) {
         keyDown_arr.push(timeStamp);
         var character_pressed = String.fromCharCode(e.keyCode);
         character_arr.push(character_pressed);
-        //console.log(timeStamp);
     }
 }
 
@@ -65,7 +64,6 @@ var appendToKeyUp = function(e) {
         var up_date = new Date();
         var timeStamp = up_date.getTime();
         keyUp_arr.push(timeStamp);
-        //console.log(timeStamp);
     }
 }
 
@@ -76,25 +74,24 @@ function login_action() {
     var password = document.getElementById('password').value;
     compute_key_down_time();
     //console.log(key_down_time_arr);
-    //console.log(in_between_arr);
-    console.log(dictionary);
+    console.log(in_between_arr);
+    //console.log(dictionary);
     if (!training) {
         post_request(username, password);
     } else {
         training_request();
     }
     reset();
+    document.getElementById("password").value = "";
 }
 
 function compute_key_down_time() {
     for (i = 0; i < keyUp_arr.length; i++)  {
         key_down_time_arr[i] = keyUp_arr[i] - keyDown_arr[i];
+        dictionary.push([character_arr[i], key_down_time_arr[i]]);
     }
     for (t = 1; t < keyDown_arr.length; t++) {
         in_between_arr[t-1] = keyDown_arr[t] - keyUp_arr[t-1];
-    }
-    for (x = 0; x < in_between_arr.length; x++) {
-        dictionary.push([character_arr[x+1], key_down_time_arr[x+1], in_between_arr[x]]);
     }
 }
 
@@ -140,12 +137,13 @@ function post_request(username, password) {
     // Send the two data arrays
     if (authenticate == true) {
         //console.log("sent data");
-        http.setRequestHeader("data", dictionary);
+        http.setRequestHeader("key_pressed", dictionary);
+        http.setRequestHeader("in_between", in_between_arr);
     }
     http.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             // Successful Login
-            window.alert("Successfully Logged In");
+            window.alert("Successfully Logged In " + this.responseText);
         } else if (this.readyState == 4) {
             console.log("Failed Login");
         }
