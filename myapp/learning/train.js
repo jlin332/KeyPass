@@ -3,13 +3,14 @@ var jaccard = require('jaccard');
 class train {
 
   constructor() {
-    this.data_pressdown = {};
-    this.data_inbetween = {};
+    this.data_pressdown = [];
+    this.data_inbetween = [];
   }
 
   addData(pressdown, inbetween) {
       console.log("begin of addData");
       console.log(this.data_pressdown);
+      console.log(pressdown);
     if(this.data_pressdown.length == 0) {
       this.data_pressdown = pressdown;
       console.log("got pushed");
@@ -21,8 +22,11 @@ class train {
     else {
         console.log("pressdown legn = " , pressdown.length );
         console.log("this.pressdown legn = " , this.data_pressdown.length );
+        var commaSplit = pressdown.split(",");
+        console.log(commaSplit);
         for (let i = 0; i < pressdown.length; i = i + 1 )  {
             console.log("2nd round here");
+            console.log(typeof(pressdown));
           var newval = (pressdown[i] + this.data_pressdown[i])/2;
           this.data_pressdown[i] = newval;
           console.log("made it here");
