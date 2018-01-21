@@ -28,6 +28,8 @@ router.post('/train', function(req, res, next){
     for (let b = 0; b < in_between.length; b++) {
         in_between[b] = parseInt(in_between[b]);
     }
+    console.log(typeof(pressDown_split));
+    console.log(typeof(in_between));
     trainer.addData(pressDown_split, in_between);
     console.log("data sent");
     res.status(200).send();
@@ -35,10 +37,19 @@ router.post('/train', function(req, res, next){
 
 router.post('/login', function(req, res, next){
   console.log("login post recieved");
-  console.log("req = ", req.get("key_pressed"));
-  console.log("req = ", req.get("in_between"));
-  var score = trainer.classify(req.get("key_pressed"), req.get("in_between"));
-  console.log(score);
+    var pressdown = req.get("key_pressed");
+    var inbetween = req.get("in_between");
+      var pressDown_split = pressdown.split(",");
+      console.log("split press");
+      var in_between = inbetween.split(",");
+      console.log("split between");
+      for (let a = 0; a < pressDown_split.length; a++) {
+          pressDown_split[a] = parseInt(pressDown_split[a]);
+      }
+      for (let b = 0; b < in_between.length; b++) {
+          in_between[b] = parseInt(in_between[b]);
+      }
+  console.log(trainer.classify(pressDown_split, in_between));
   res.status(200).send("score");
 });
 

@@ -1,4 +1,5 @@
 var jaccard = require('jaccard');
+var distance = require('euclidean-distance');
 
 class train {
 
@@ -20,13 +21,7 @@ class train {
        this.data_inbetween = inbetween;
     }
     else {
-        console.log("pressdown legn = " , pressdown.length );
-        console.log("this.pressdown legn = " , this.data_pressdown.length );
-        var commaSplit = pressdown.split(",");
-        console.log(commaSplit);
         for (let i = 0; i < pressdown.length; i = i + 1 )  {
-            console.log("2nd round here");
-            console.log(typeof(pressdown));
           var newval = (pressdown[i] + this.data_pressdown[i])/2;
           this.data_pressdown[i] = newval;
           console.log("made it here");
@@ -49,7 +44,7 @@ class train {
     }
     else{
       for (i in pressdown){
-        if(pressdown[i][0] != this.data_pressdown[i][0]){
+        if(pressdown[i] != this.data_pressdown[i]){
             console.log("forloop false " + i);
           return false;
         }
@@ -61,22 +56,28 @@ class train {
   classify(press, between){
     console.log("Classifying...");
     //jacardi comparison
-    var between_index = jaccard.index(between, this.data_inbetween, function() {
-        console.log("ran between index");
-    });
-    console.log(between_index);
-    var new_arr = [];
-    var new_login = [];
-    for (var a = 0; a < press.length; a++) {
-        new_arr[a] = press[a][1];
-        new_login = this.data_pressdown[a][1];
-    }
-    console.log("done classifying, using jaccard");
-    var pressdown_index = jaccard.index(new_arr, new_login, function() {
-        console.log("jaccard index fine again...returning");
-    });
+     console.log("between valuies");
+     console.log(between);
+     console.log(this.data_inbetween);
+    // var between_index = jaccard.index(between, this.data_inbetween);
+    // console.log("between index " +  between_index);
+     console.log("press values");
+     console.log(press);
+     console.log(this.data_pressdown);
+     var between_sum = 0;
+     for (let a = 0; a < this.data_inbetween.length; a++) {
+        between_sum += this.data_inbetween[a];
+     }
+     var press_sum = 0;
+     for (let a = 0; a < this.data_pressdown.length; a++) {
+         press_sum += this.data_pressdown[a];
+     }
+    // var pressdown_index = jaccard.index(press, this.data_pressdown);
+    // console.log(pressdown_index);
     // 75-25 ratio for jaccari index
-    return ((pressdown_index * 0.25) + (between_index * 0.75));
+    var score1 = Math.abs(distance(press, this.data_pressdown))/press_sum;
+    var score2 = Math.abs(distance(between, this.data_inbetween))/Math.abs(between_sum);
+    return (score1 + score2);
   }
 }
 
