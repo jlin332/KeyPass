@@ -147,7 +147,7 @@ function post_request(username, password) {
         }
         else if (this.readyState == 4){
           window.alert("unsuccessful login");
-          document.getElementById("ifnotsuccess").style.display = "block";
+          document.getElementById("ifsuccess").style.display = "none";
         }
 
         else {
