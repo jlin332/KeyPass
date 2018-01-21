@@ -48,14 +48,10 @@ class train {
 
   average_add_inbetween(inbetween) {
     //averages into data_inbetween
-    if (this.data_inbetween.length == 0) {
-        this.data_inbetween = inbetween;
-    } else {
         for (i = 0; i < inbetween.length; i++ ) {
             var avg = (inbetween[i] + this.data_inbetween[i])/2;
             this.data_inbetween[i] = avg;
         }
-    }
   }
 
   // {input: { r: 0.03, g: 0.7, b: 0.5 }, output: 0},  // black
