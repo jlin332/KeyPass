@@ -11,7 +11,7 @@ var in_between_arr = [];
 var dictionary = [];
 
 var authenticate = false;
-var is_user = 1;
+var is_user = 0;
 var training = false;
 
 var authentication_toggle = document.getElementById("authenticate");

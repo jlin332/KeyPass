@@ -1,24 +1,30 @@
 var limdu = require('limdu');
 
-class trainer{
+class train {
 
-  contructor() {
+  constructor() {
     this.classifier = new limdu.classifiers.NeuralNetwork();
-    this.data = null;
+    this.data = [];
   }
 
   addData(toadd, bit){
-    this.data.push({input: toadd, output: bit});
+    var obj = {input: toadd, output: bit}
+    this.data.push(obj);
+    console.log("datapoint = ", obj);
   }
 
   // {input: { r: 0.03, g: 0.7, b: 0.5 }, output: 0},  // black
-  train(){
-    classifier.trainBatch(this.data);
+  trainer(callback){
+    console.log("training....");
+    this.classifier.trainBatch(this.data);
+    console.log("finished batch");
+    return callback();
   }
 
-  classify(data, callback){
-    classifier.classify(data, function(success){
-      callback(success);
-    })
+  classify(data){
+    console.log("Classifying...");
+    return this.classifier.classify(data);
   }
 }
+
+module.exports = train;

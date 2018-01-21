@@ -1,9 +1,9 @@
 var express = require('express');
 var json = require('jsonify');
-var trainer = require('../learning/train');
+const train = require('../learning/train');
 var router = express.Router();
 
-// var train = new trainer.trainer();
+var trainer = new train();
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express' });
@@ -17,17 +17,20 @@ router.post('/train', function(req, res, next){
     var username = req.get("username");
     var password = req.get("password");
     var data = req.get("data");
-    //console.log(data);
+    console.log(data);
     console.log(req.body["user"]);
+    trainer.addData(data, req.body["user"]);
     res.status(200).send();
 })
 
 router.post('/login', function(req, res, next){
-  train.classify(req.body.data, function(cheese){
-    if(cheese){
-      res.send(true);
-    }
+  console.log("Verifying with...");
+  console.log(req.get("data"));
+  trainer.trainer(function () {
+    var score = trainer.classify(req.get("data"));
+    console.log(score);
   })
+
 
 })
 
