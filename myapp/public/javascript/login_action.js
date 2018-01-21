@@ -145,13 +145,12 @@ function post_request(username, password) {
             window.alert("Successfully Logged In ");
             document.getElementById("ifsuccess").style.display = "block";
         }
-        else if (this.readyState == 4 && this.status == 202){
+        else if (this.readyState == 4){
           window.alert("unsuccessful login");
           document.getElementById("ifnotsuccess").style.display = "block";
         }
 
-
-        else if (this.readyState == 4) {
+        else {
             console.log("Failed Login");
         }
     }

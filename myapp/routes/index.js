@@ -14,26 +14,25 @@ router.get('/john', function(req, res, next){
 });
 
 router.post('/train', function(req, res, next){
-    console.log("sending");
-    var pressdown = req.get("key_pressed");
-    var inbetween = req.get("in_between");
-    console.log(pressdown);
-    var pressDown_split = pressdown.split(",");
-    console.log("split press");
-    var in_between = inbetween.split(",");
-    var newArr_press = new Array();
-    var newArr_between = new Array();
-    for (let a = 0; a < pressDown_split.length; a++) {
-        new_arr_press[a] = parseInt(pressDown_split[a]);
-    }
-    for (let b = 0; b < in_between.length; b++) {
-        new_arr_between = parseInt(in_between[a]);
-    }
-    console.log(typeof(pressDown_split));
-    console.log(typeof(in_between));
-    trainer.addData(pressDown_split, in_between);
-    console.log("data sent");
-    res.status(200).send();
+  console.log("sending");
+    var pressdown = req.get("key_pressed");
+    var inbetween = req.get("in_between");
+    console.log(pressdown);
+    var pressDown_split = pressdown.split(",");
+    console.log("split press");
+    var in_between = inbetween.split(",");
+    console.log("split between");
+    for (let a = 0; a < pressDown_split.length; a++) {
+        pressDown_split[a] = parseInt(pressDown_split[a]);
+    }
+    for (let b = 0; b < in_between.length; b++) {
+        in_between[b] = parseInt(in_between[b]);
+    }
+    console.log(typeof(pressDown_split));
+    console.log(typeof(in_between));
+    trainer.addData(pressDown_split, in_between);
+    console.log("data sent");
+    res.status(200).send();
 });
 
 router.post('/login', function(req, res, next){
