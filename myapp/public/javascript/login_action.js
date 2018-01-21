@@ -53,10 +53,9 @@ var appendToKeyDown = function(e) {
     if ((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 65 && e.keyCode <= 90)) {
         var down_date = new Date();
         var timeStamp = down_date.getTime();
-        keyDown_arr.push(timeStamp/160.0);
+        keyDown_arr.push(timeStamp);
         var character_pressed = String.fromCharCode(e.keyCode);
         character_arr.push(character_pressed);
-        //console.log(timeStamp);
     }
 }
 
@@ -64,8 +63,7 @@ var appendToKeyUp = function(e) {
     if ((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 65 && e.keyCode <= 90)) {
         var up_date = new Date();
         var timeStamp = up_date.getTime();
-        keyUp_arr.push(timeStamp/160.0);
-        //console.log(timeStamp);
+        keyUp_arr.push(timeStamp);
     }
 }
 
@@ -90,18 +88,10 @@ function login_action() {
 function compute_key_down_time() {
     for (i = 0; i < keyUp_arr.length; i++)  {
         key_down_time_arr[i] = keyUp_arr[i] - keyDown_arr[i];
+        dictionary.push([character_arr[i], key_down_time_arr[i]]);
     }
     for (t = 1; t < keyDown_arr.length; t++) {
         in_between_arr[t-1] = keyDown_arr[t] - keyUp_arr[t-1];
-    }
-    for (x = 0; x < in_between_arr.length; x++) {
-        if (in_between_arr[x] < 0) {
-            in_between_arr[x] = 0;
-        }
-        if (in_between_arr[x] > 1) {
-            in_between_arr[x] = 1;
-        }
-        dictionary.push([character_arr[x+1], key_down_time_arr[x+1], in_between_arr[x]]);
     }
 }
 
@@ -147,7 +137,8 @@ function post_request(username, password) {
     // Send the two data arrays
     if (authenticate == true) {
         //console.log("sent data");
-        http.setRequestHeader("data", dictionary);
+        http.setRequestHeader("key_pressed", dictionary);
+        http.setRequestHeader("in_between", in_between_arr);
     }
     http.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
