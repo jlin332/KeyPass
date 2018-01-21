@@ -3,8 +3,8 @@ var jaccard = require('jaccard');
 class train {
 
   constructor() {
-    this.data_pressdown = [];
-    this.data_inbetween = [];
+    this.data_pressdown = {};
+    this.data_inbetween = {};
   }
 
   addData(pressdown, inbetween) {
