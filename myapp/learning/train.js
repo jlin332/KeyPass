@@ -7,26 +7,29 @@ class train {
     this.data_inbetween = [];
   }
 
-  addData(pressdown, inbetween){
-    console.log("adding");
-    console.log("pressdown data = ", this.data_pressdown.length == 0 );
-    if(this.data_pressdown.length == 0){
-      console.log("undefined", score);
-      // this.data_pressdown.push(pressdown);
+  addData(pressdown, inbetween) {
+
+    if(this.data_pressdown.length == 0) {
+      this.data_pressdown.push(pressdown);
     }
-    if(this.data_inbetween.length == 0){
-      console.log("undefined 2", score);
-      // this.data_inbetween.push(inbetween);
+    if(this.data_inbetween.length == 0) {
+       this.data_inbetween.push(inbetween);
     }
     else if(is_same(pressdown)){
-      console.log("not undefined");
-      average_add_pressdown(pressdown);
-      average_add_inbetween(inbetween);
+      for (i = 0; i < pressdown.length; i++ )  {
+        var newval = (pressdown[i][1] + this.data_pressdown[i][1])/2;
+        this.data_pressdown[i][1] = newval;
+      }
+      for (i = 0; i < inbetween.length; i++ ) {
+          var avg = (inbetween[i] + this.data_inbetween[i])/2;
+          this.data_inbetween[i] = avg;
+      }
     }
     else{
       console.log("else!");
       //donothing
     }
+    return true;
   }
 
   is_same(pressdown){
@@ -34,36 +37,13 @@ class train {
       return false;
     }
     else{
-      for(var i in pressdown){
+      for (i in pressdown){
         if(pressdown[i][0] != this.data_pressdown[i][0]){
           return false;
         }
       }
       return true;
     }
-  }
-
-  average_add_pressdown(pressdown){
-    //averages into data_pressdown
-    for(var i in pressdown) {
-      var newval = (pressdown[i][1] + this.data_pressdown[i][1])/2;
-      this.data_pressdown[i][1] = newval;
-    }
-
-  }
-
-  average_add_inbetween(inbetween) {
-    //averages into data_inbetween
-      for (i = 0; i < inbetween.length; i++ ) {
-          var avg = (inbetween[i] + this.data_inbetween[i])/2;
-          this.data_inbetween[i] = avg;
-      }
-  }
-
-  trainer(callback){
-    console.log("training.... using this datapoint");
-    console.log("finished batch");
-    return callback();
   }
 
   classify(press, between){

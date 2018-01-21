@@ -14,12 +14,11 @@ router.get('/john', function(req, res, next){
 });
 
 router.post('/train', function(req, res, next){
-    var username = req.get("username");
-    var password = req.get("password");
-    var pressdown = req.get("key_pressed");
-    var inbetween = req.get("in_between");
     console.log("sending");
-
+    var pressdown = req.get("key_pressed");
+    console.log(pressdown);
+    var inbetween = req.get("in_between");
+    console.log(inbetween);
     trainer.addData(pressdown, inbetween);
     console.log("data sent");
     res.status(200).send();
@@ -31,7 +30,7 @@ router.post('/login', function(req, res, next){
   console.log("req = ", req.get("in_between"));
   var score = trainer.classify(req.get("key_pressed"), req.get("in_between"));
   console.log(score);
-  res.status(200).send(score);
+  res.status(200).send("score");
 });
 
 module.exports = router;

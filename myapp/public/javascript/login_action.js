@@ -111,7 +111,8 @@ function training_request() {
     http.setRequestHeader("Content-type", "application/json");
     // Send the two data arrays
     if (authenticate == true) {
-        http.setRequestHeader("data", dictionary);
+        http.setRequestHeader("key_pressed", dictionary);
+        http.setRequestHeader("in_between", in_between_arr);
     }
     http.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -132,8 +133,6 @@ function post_request(username, password) {
     http.open("POST", "/login", true);
     http.setRequestHeader("Content-type", "application/json");
     // Send the Password and Username for first level authentication
-    http.setRequestHeader("username", username);
-    http.setRequestHeader("password", password);
     // Send the two data arrays
     if (authenticate == true) {
         //console.log("sent data");
