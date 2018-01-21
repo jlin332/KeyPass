@@ -21,12 +21,13 @@ router.post('/train', function(req, res, next){
     var pressDown_split = pressdown.split(",");
     console.log("split press");
     var in_between = inbetween.split(",");
-    console.log("split between");
+    var newArr_press = new Array();
+    var newArr_between = new Array();
     for (let a = 0; a < pressDown_split.length; a++) {
-        pressDown_split[a] = parseInt(pressDown_split[a]);
+        new_arr_press[a] = parseInt(pressDown_split[a]);
     }
     for (let b = 0; b < in_between.length; b++) {
-        in_between[b] = parseInt(in_between[b]);
+        new_arr_between = parseInt(in_between[a]);
     }
     console.log(typeof(pressDown_split));
     console.log(typeof(in_between));

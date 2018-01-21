@@ -142,9 +142,16 @@ function post_request(username, password) {
     http.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             // Successful Login
-            console.log(this.responseText);
-            window.alert("Successfully Logged In " + this.responseText);
-        } else if (this.readyState == 4) {
+            window.alert("Successfully Logged In ");
+            document.getElementById("ifsuccess").style.display = "block";
+        }
+        else if (this.readyState == 4 && this.status == 202){
+          window.alert("unsuccessful login");
+          document.getElementById("ifnotsuccess").style.display = "block";
+        }
+
+
+        else if (this.readyState == 4) {
             console.log("Failed Login");
         }
     }
