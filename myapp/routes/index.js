@@ -17,18 +17,18 @@ router.post('/train', function(req, res, next){
     console.log("sending");
     var pressdown = req.get("key_pressed");
     var inbetween = req.get("in_between");
-    //console.log(pressdown);
+    console.log(pressdown);
     var pressDown_split = pressdown.split(",");
+    console.log("split press");
     var in_between = inbetween.split(",");
-    var newArr_press = new Array();
-    var newArr_between = new Array();
+    console.log("split between");
     for (let a = 0; a < pressDown_split.length; a++) {
-        new_arr_press[a] = parseInt(pressDown_split[a]);
+        pressDown_split[a] = parseInt(pressDown_split[a]);
     }
     for (let b = 0; b < in_between.length; b++) {
-        new_arr_between = parseInt(in_between[a]);
+        in_between[b] = parseInt(in_between[b]);
     }
-    trainer.addData(newArr_press, newArr_between);
+    trainer.addData(pressDown_split, in_between);
     console.log("data sent");
     res.status(200).send();
 });
