@@ -56,6 +56,7 @@ var appendToKeyDown = function(e) {
         keyDown_arr.push(timeStamp);
         var character_pressed = String.fromCharCode(e.keyCode);
         character_arr.push(character_pressed);
+        console.log(timeStamp);
     }
 }
 
@@ -64,17 +65,16 @@ var appendToKeyUp = function(e) {
         var up_date = new Date();
         var timeStamp = up_date.getTime();
         keyUp_arr.push(timeStamp);
+        console.log(timeStamp);
     }
 }
 
 function login_action() {
     // Handle Post request
-    console.log("Login_action_pressed");
     var username = document.getElementById('user_id').value;
     var password = document.getElementById('password').value;
     compute_key_down_time();
     //console.log(key_down_time_arr);
-    console.log(in_between_arr);
     //console.log(dictionary);
     if (!training) {
         post_request(username, password);
