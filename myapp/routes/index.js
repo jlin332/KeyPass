@@ -1,6 +1,6 @@
 var express = require('express');
 var json = require('jsonify');
-const train = require('../learning/trainv2');
+const train = require('../learning/train');
 var router = express.Router();
 
 var trainer = new train();
@@ -16,18 +16,22 @@ router.get('/john', function(req, res, next){
 router.post('/train', function(req, res, next){
     var username = req.get("username");
     var password = req.get("password");
-    var data = req.get("data");
+    var pressdown = req.get("key_pressed");
+    var inbetween = req.get("in_between");
+    console.log("sending");
 
-    trainer.addData(data, req.body["user"]);
+    trainer.addData(pressdown, inbetween);
+    console.log("data sent");
     res.status(200).send();
 });
 
 router.post('/login', function(req, res, next){
-  trainer.trainer(function () {
-    var score = trainer.classify(req.get("data"));
-    //console.log(score + " " + req.body["user"]);
-    res.status(200).send(score);
-    });
+  console.log("login post recieved");
+  console.log("req = ", req.get("key_pressed"));
+  console.log("req = ", req.get("in_between"));
+  var score = trainer.classify(req.get("key_pressed"), req.get("in_between"));
+  console.log(score);
+  res.status(200).send(score);
 });
 
 module.exports = router;
