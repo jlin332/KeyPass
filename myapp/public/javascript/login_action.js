@@ -142,7 +142,8 @@ function post_request(username, password) {
     http.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             // Successful Login
-            window.alert("Successfully Logged In ");
+            console.log(this.responseText);
+            window.alert("Successfully Logged In " + this.responseText);
         } else if (this.readyState == 4) {
             console.log("Failed Login");
         }

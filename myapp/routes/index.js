@@ -49,8 +49,12 @@ router.post('/login', function(req, res, next){
       for (let b = 0; b < in_between.length; b++) {
           in_between[b] = parseInt(in_between[b]);
       }
-  console.log(trainer.classify(pressDown_split, in_between));
-  res.status(200).send("score");
+      var score = trainer.classify(pressDown_split, in_between);
+      if (score > 1.0) {
+          res.status(202).send();
+      } else {
+          res.status(200).send();
+      }
 });
 
 module.exports = router;
