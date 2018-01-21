@@ -9,38 +9,31 @@ class train {
 
   addData(pressdown, inbetween) {
       console.log("begin of addData");
+      console.log(this.data_pressdown);
     if(this.data_pressdown.length == 0) {
       this.data_pressdown = pressdown;
       console.log("got pushed");
-      console.log(pressdown);
     }
-    if(this.data_inbetween.length == 0) {
+    if (this.data_inbetween.length == 0) {
         console.log("got pushed");
        this.data_inbetween = inbetween;
-       console.log(inbetween);
-    } else if(this.is_same(pressdown)){
-        console.log(pressdown)
-        console.log(this.data_pressdown);
-      for (i = 0; i < pressdown.length; i++ )  {
-        var newval = (pressdown[i][1] + this.data_pressdown[i][1])/2;
-        this.data_pressdown[i][1] = newval;
-      }
-      for (i = 0; i < inbetween.length; i++ ) {
-          var avg = (inbetween[i] + this.data_inbetween[i])/2;
-          this.data_inbetween[i] = avg;
-      }
-      console.log("is_same");
-  } else {
-        for (i = 0; i < pressdown.length; i++ )  {
-          var newval = (pressdown[i][1] + this.data_pressdown[i][1])/2;
-          this.data_pressdown[i][1] = newval;
+    }
+    else {
+        console.log("pressdown legn = " , pressdown.length );
+        console.log("this.pressdown legn = " , this.data_pressdown.length );
+        for (let i = 0; i < pressdown.length; i = i + 1 )  {
+            console.log("2nd round here");
+          var newval = (pressdown[i] + this.data_pressdown[i])/2;
+          this.data_pressdown[i] = newval;
+          console.log("made it here");
         }
-        for (i = 0; i < inbetween.length; i++ ) {
+        for (let i = 0; i < inbetween.length; i = i + 1 ) {
             var avg = (inbetween[i] + this.data_inbetween[i])/2;
             this.data_inbetween[i] = avg;
         }
         console.log("is_same");
     }
+    console.log("size of" + this.data_pressdown);
   }
 
   is_same(pressdown) {

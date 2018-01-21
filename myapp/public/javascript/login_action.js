@@ -86,11 +86,11 @@ function login_action() {
 }
 
 function compute_key_down_time() {
-    for (i = 0; i < keyUp_arr.length; i++)  {
+    for (let i = 0; i < keyUp_arr.length; i++)  {
         key_down_time_arr[i] = keyUp_arr[i] - keyDown_arr[i];
-        dictionary.push([character_arr[i], key_down_time_arr[i]]);
+        dictionary.push(key_down_time_arr[i]);
     }
-    for (t = 1; t < keyDown_arr.length; t++) {
+    for (let t = 1; t < keyDown_arr.length; t++) {
         in_between_arr[t-1] = keyDown_arr[t] - keyUp_arr[t-1];
     }
 }
@@ -142,7 +142,7 @@ function post_request(username, password) {
     http.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             // Successful Login
-            window.alert("Successfully Logged In " + this.responseText);
+            window.alert("Successfully Logged In ");
         } else if (this.readyState == 4) {
             console.log("Failed Login");
         }
