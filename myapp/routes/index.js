@@ -16,9 +16,8 @@ router.get('/john', function(req, res, next){
 router.post('/train', function(req, res, next){
     console.log("sending");
     var pressdown = req.get("key_pressed");
-    console.log(pressdown);
     var inbetween = req.get("in_between");
-    console.log(inbetween);
+    //console.log(pressdown);
     trainer.addData(pressdown, inbetween);
     console.log("data sent");
     res.status(200).send();
