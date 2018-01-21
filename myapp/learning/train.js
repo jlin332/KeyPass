@@ -8,14 +8,12 @@ class train {
   }
 
   addData(toadd, bit){
-    var obj = {input: toadd, output: bit}
-    this.data.push(obj);
-    console.log("datapoint = ", obj);
+    this.data.push({input: toadd, output: bit});
   }
 
   // {input: { r: 0.03, g: 0.7, b: 0.5 }, output: 0},  // black
   trainer(callback){
-    console.log("training....");
+    console.log("training.... using this datapoint");
     this.classifier.trainBatch(this.data);
     console.log("finished batch");
     return callback();
