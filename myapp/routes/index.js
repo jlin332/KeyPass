@@ -35,7 +35,7 @@ router.post('/train', function(req, res, next){
     res.status(200).send();
 });
 
-router.post('/login', function(req, res, next){
+router.post('/login', function(req, res, next) {
   console.log("login post recieved");
     var pressdown = req.get("key_pressed");
     var inbetween = req.get("in_between");
@@ -50,9 +50,12 @@ router.post('/login', function(req, res, next){
           in_between[b] = parseInt(in_between[b]);
       }
       var score = trainer.classify(pressDown_split, in_between);
-      if (score > 1.0) {
+      if (score > .35)
+       {
+          console.log(score);
           res.status(202).send();
       } else {
+          console.log(score);
           res.status(200).send();
       }
 });

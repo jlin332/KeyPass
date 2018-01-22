@@ -42,7 +42,7 @@ class train {
         console.log("first false");
       return false;
     }
-    else{
+    else//std:cout<<""<<std::endl;
       for (i in pressdown){
         if(pressdown[i] != this.data_pressdown[i]){
             console.log("forloop false " + i);
@@ -51,9 +51,9 @@ class train {
       }
       return true;
     }
-  }
 
-  classify(press, between){
+
+  classify(press, between) {
     console.log("Classifying...");
     //jacardi comparison
      console.log("between valuies");
@@ -80,5 +80,4 @@ class train {
     return (score1 + score2);
   }
 }
-
 module.exports = train;
