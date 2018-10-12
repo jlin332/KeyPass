@@ -4,7 +4,7 @@ How do you know if the person tpying your credentials is really you? It turns ou
 
 **Demo**
 
-[](KPDemo.gif)
+![](KPDemo.gif)
 
 
 *KeyPass is a Hackathon project started at SwampHacks.*
