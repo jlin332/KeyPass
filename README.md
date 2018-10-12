@@ -12,6 +12,8 @@ How do you know if the person tpying your credentials is really you? It turns ou
 
 
 **To Run**
+
+
 clone the repo
 ```git clone https://github.com/jlin332/KeyPass.git```
 
