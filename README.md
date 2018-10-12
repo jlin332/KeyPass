@@ -3,7 +3,10 @@
 How do you know if the person tpying your credentials is really you? It turns out every person has a slightly different typing pattern. KeyPass learns your typing pattern for your password and determines if someone typing that same password is really you!
 
 **Demo**
-![](KPDemo.gif)
+
+[](KPDemo.gif)
+
+
 *KeyPass is a Hackathon project started at SwampHacks.*
 
 
