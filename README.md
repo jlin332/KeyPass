@@ -1,14 +1,10 @@
 # KeyPass
 
-How do you know if the person tpying your credentials is really you? It turns out every person has a slightly different typing pattern. KeyPass learns your typing pattern for your password and determines if someone typing that same password is really you!
+How do you know if the person typing your credentials is really you? It turns out every person has a slightly different typing pattern. KeyPass learns your typing pattern for your password and determines if the person typing that password is really you!
 
 **Demo**
 
 ![](KPDemo.gif)
-
-
-*KeyPass is a Hackathon project started at SwampHacks.*
-
 
 
 **To Run**
@@ -32,3 +28,15 @@ install dependencies
 run it with
 ```npm start```
 
+**Common Issues**
+
+
+If you recieve a missing module error, please npm install that package
+
+
+
+
+
+____________________________________________________________________________________
+
+*KeyPass is a Hackathon project started at SwampHacks.*
